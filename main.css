@@ -1,0 +1,21 @@
+
+#gluggi{
+    background-color:white;
+    position:absolute;
+    border:solid 1px black;
+
+}
+#leikmadur{
+    height: 30px;
+    width: 30px;
+    top:10px;
+    left:10px;
+    background-color: black;;;
+    border-radius: 50%;
+    position:absolute;
+    z-index:1;
+}
+.container{
+    height:502px;
+    width:502px;
+}
