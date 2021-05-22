@@ -22,7 +22,7 @@ function checkDirection(){
             direction = "up";
         }
         else if(key==="ArrowDown"){
-            direction 
+            direction = "down";
         }
     });
 }
