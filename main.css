@@ -1,10 +1,13 @@
 
+body{
+    height:1000px;
+}
 #gluggi{
     background-color:white;
     position:absolute;
     border:solid 1px black;
-
 }
+
 #leikmadur{
     height: 30px;
     width: 30px;

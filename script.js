@@ -1,37 +1,86 @@
 
 const canvas = document.querySelector('#gluggi');
 const player = document.getElementById('leikmadur');
+const page = document.getElementsByTagName('BODY')[0];
 const width = canvas.width;
 const height = canvas.height;
 const ctx = canvas.getContext('2d');
-let speed = 1;
+let speedX = 0;
+let speedY = 0;
 let currentX = 250;
 let currentY = 250;
 let mouseX = 0;
 let mouseY = 0;
+let mouseDown = false;
 
 
 function outOfBounds(){
-    if(currentX>480){
-        currentX = 10;
+
+    if((currentX + speedX)>480){
+        speedX = -speedX;
     }
-    if(currentX<8){
-        currentX = 480;
+    if((currentX + speedX)<8){
+        speedX = -speedX;
     }
     
-    if(currentY>480){
-        currentY = 10;
+    if((currentY + speedY)>480){
+        speedY = -speedY;
     }
-    if(currentY<8){
-        currentY= 480;
+    if((currentY + speedY)<8){
+        speedY = -speedY;
     }
+
 }
 
 function mouseDrag(){
-    
+    player.addEventListener('mousedown', e => {
+        mouseDown = true;
+        console.log("mousedown!");
+    });
+    page.addEventListener('mouseup', e => {
+        if(mouseDown==true){
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+            console.log("mouseup!");
+            mouseDown = false;
+            speedX = (speedX + (currentX-mouseX));
+            speedY = (speedY + (currentY-mouseY));
+            console.log('speedX = ' + speedX);
+            console.log('speedY = ' + speedY);
+
+        }
+    });
 }
 function update(){
-
+    outOfBounds();
+    currentX = (currentX + speedX);
+    currentY = (currentY + speedY);
+    if(speedX>0){
+        speedX = speedX -1;
+        if(speedX<0){
+            speedX = 0;
+        }
+    }
+    if(speedY>0){
+        speedY = speedY -1;
+        if(speedY<0){
+            speedY=0;
+        }
+    }
+    if(speedX<0){
+        speedX = speedX +1;
+        if(speedX>0){
+            speedX=0;
+        }
+    }
+    if(speedY<0){
+        speedY = speedY +1;
+        if(speedY>0){
+            speedY=0;
+        }
+    }
+    
+    
 }
 
 function move(){
@@ -45,5 +94,6 @@ function gameLoop(){
     requestAnimationFrame(gameLoop);
 }
 
+mouseDrag();
 requestAnimationFrame(gameLoop);
 
